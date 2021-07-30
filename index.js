@@ -20,14 +20,27 @@ if (config.launch_server) {
     }
 }
 
-var socket = io(config.server_url);
-socket.on('connect', () => {
+// Connect to socket and automatic reconnection
+var socket = io(config.server_url, {autoConnect: false});
+var time = 0;
+
+socket.on('connect', () => { // Authenticate client
     const auth = {
         "auth":config.auth_token,
         "name": config.client_name,
         "type": config.client_type
     };
     socket.send(JSON.stringify(auth));
+    time = 0;
+});
+
+socket.on('disconnect', () => { // Retry connection if failed
+    setTimeout(() => {
+        socket.connect();
+        if (time <= 30000) {
+            time += 2000;
+        }
+    }, time)
 });
 
 client.login(config.token); // Login to the bot account
