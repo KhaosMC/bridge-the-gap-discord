@@ -6,7 +6,6 @@ let client = new Discord.Client();
 var socket;
 
 const config = JSON.parse(fs.readFileSync('config.json'))
-var chatbridge_enabled = true;
 console.log(config.server_url)
 
 client.login(config.token);
@@ -30,7 +29,7 @@ client.on('ready', async () => {
 })
 
 client.on('message', async message => {
-    if (message.channel.id == config.channel_id && chatbridge_enabled && !(message.author.bot)) {
+    if (message.channel.id == config.channel_id && !(message.author.bot)) {
         const data = {
             "msg": message.content,
             "username": message.author.username
