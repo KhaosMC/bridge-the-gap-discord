@@ -41,6 +41,8 @@ client.on('message', async message => {
  try {
     socket.on('message', function (data) {
         const msg = JSON.parse(data);
-        client.guilds.channels.cache.get(config.channel_id).send(`[${msg.client_name}] <${msg.username}> ${msg.msg}`);
+        if (msg.msg != null) {
+            client.guilds.channels.cache.get(config.channel_id).send(`[${msg.client_name}] <${msg.username}> ${msg.msg}`);
+        };
     })
 } catch {} 
