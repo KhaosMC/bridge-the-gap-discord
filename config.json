@@ -1,9 +1,10 @@
 {
-    "token":"NzkzNjQyNzE4MTc3NjU2ODQz.X-vPYQ.XinsGjUR6VSGzhLfrphgXgvzRx8",
+    "token":"token",
+    "channel_id": "chatbridge channel id"
     "launch_server": true,
+    "server_path": "relative path to websocket server for launching it"
     "client_name": "Discord",
     "client_type": "discord",
     "server_url": "wss://localhost:45539/",
-    "auth_token": "auth token for websocket server",
-    "channel_id": "774270339328901120"
+    "auth_token": "auth token for websocket server"
 }
