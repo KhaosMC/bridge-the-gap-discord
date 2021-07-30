@@ -11,7 +11,7 @@ console.log(config.server_url)
 client.login(config.token);
 
 client.on('ready', async () => {
-    client.user.setActivity('over Khaos Applications', {
+    client.user.setActivity('over bridge channel', {
         type: "WATCHING"
     });
     console.log('Bot is up and running!');
