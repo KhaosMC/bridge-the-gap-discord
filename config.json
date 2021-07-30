@@ -1,0 +1,9 @@
+{
+    "token":"bot token",
+    "launch_server": true,
+    "client_name": "Discord",
+    "client_type": "discord",
+    "server_url": "wss://localhost:45539/",
+    "auth_token": "auth token for websocket server",
+    "channel_id": "chatbridge channel id"
+}
