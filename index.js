@@ -34,7 +34,7 @@ socket.on('open', () => { // Authenticate client
     time = 0;
 });
 
-socket.on('disconnect', () => { // Retry connection if failed
+socket.on('close', () => { // Retry connection if failed
     setTimeout(() => {
         socket.connect();
         if (time <= 30000) {
