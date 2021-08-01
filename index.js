@@ -68,6 +68,6 @@ client.on('message', async message => {
 socket.on('message', function(data) {
     const msg = JSON.parse(data);
     if (msg.msg != null) {
-        client.guilds.channels.cache.get(config.channel_id).send(`[${msg.client_name}] <${msg.username}> ${msg.msg}`);
+        client.channels.cache.get(config.channel_id).send(`[${msg.client_name}] <${msg.username}> ${msg.msg}`);
     };
 });
