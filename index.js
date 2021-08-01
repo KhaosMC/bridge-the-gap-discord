@@ -1,6 +1,6 @@
 // Import libraries and create a discord client
 const Discord = require('discord.js');
-const io = require('socket.io-client');
+const WebSocket = require('ws');
 const fs = require('fs');
 const execFile = require('child_process').execFile;
 
@@ -21,10 +21,10 @@ if (config.launch_server) {
 }
 
 // Connect to socket and automatic reconnection
-var socket = io(config.server_url, {autoConnect: false});
+var socket = new WebSocket(config.server_url);
 var time = 0;
 
-socket.on('connect', () => { // Authenticate client
+socket.on('open', () => { // Authenticate client
     const auth = {
         "auth":config.auth_token,
         "name": config.client_name,
@@ -58,7 +58,7 @@ client.on('message', async message => {
     if (message.channel.id == config.channel_id && !(message.author.bot)) {
         const data = {
             "msg": message.content,
-            "username": message.author.username
+            "from": message.author.username
         };
         socket.send(JSON.stringify(data));
     }
