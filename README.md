@@ -6,7 +6,7 @@ The client requires a bunch of nodejs packages (can be installed through npm).
 ```
 git clone https://github.com/KhaosMC/bridge-the-gap-discord.git
 cd bridge-the-gap-discord
-npm i discord.js socket.io-client fs child_process
+npm i discord.js ws fs child_process
 ```
 
 # Config
