@@ -57,17 +57,29 @@ client.on('ready', async () => {
 client.on('message', async message => {
     if (message.channel.id == config.channel_id && !(message.author.bot)) {
         const data = {
-            "msg": message.content,
-            "from": message.author.username
+            "type": "chat_message",
+            "targets": [],
+            "user": {
+                "id": message.author.id,
+                "name": message.author.username,
+                "display_color": message.author.display_color
+            },
+            "message": message.content
         };
         socket.send(JSON.stringify(data));
     }
 })
 
 // Send message to channel if message is recieved
-socket.on('message', function(data) {
-    const msg = JSON.parse(data);
-    if (msg.msg != null) {
-        client.channels.cache.get(config.channel_id).send(`[${msg.client_name}] <${msg.username}> ${msg.msg}`);
-    };
+socket.on('message', function(recievedMessage) {
+    const data = JSON.parse(recievedMessage);
+    if (data.type == 'chat_message') {
+        client.channels.cache.get(config.channel_id).send(`[${data.source.name}] <${data.user.name}> ${data.message}`)
+    } else if (data.type == 'user_connection') {
+        if (data.connect) {
+            client.channels.cache.get(config.channel_id).send(`[${data.source.name}] ${data.user.name} joined the game`)
+        } else if (!data.connect) {
+            client.channels.cache.get(config.channel_id).send(`[${data.source.name}] ${data.user.name} left the game`)
+        }
+    }
 });
