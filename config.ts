@@ -6,7 +6,7 @@ const optionsSchema = z.object({
     channelId: z.string().min(16).max(24),
     serverId: z.string().min(16).max(24),
     btgToken: z.string().max(128).refine((arg) => arg !== "bridge the gap token"),
-    btgUrl: z.string().url().includes('ws'),
+    btgUrl: z.string().url().startsWith('ws'),
 })
 
 const inputOptions = {
